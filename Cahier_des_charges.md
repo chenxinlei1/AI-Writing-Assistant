@@ -25,10 +25,14 @@ L’application vise plusieurs catégories d’utilisateurs :
 - **Apprenants en anglais (EFL/ESL)** : Pour perfectionner leur maîtrise de la langue écrite  
 - **Rédacteurs et blogueurs** : Pour fluidifier et clarifier leurs écrits  
 
-## **4. Fonctionnalités Principales**  
+## 4. État de l'art
 
-L’application proposera les outils suivants :  
+Un champ de texte permettra aux utilisateurs de saisir un texte en anglais à corriger ou à améliorer.
 
-- **Correction grammaticale** : Détection et correction des erreurs syntaxiques  
-- **Correction orthographique** : Correction des fautes d’orthographe  
-- **Complétion automatique** : Suggestions contextuelles pour compléter le texte  
+### Fonctionnalités associées  
+
+Trois boutons seront disponibles sous ce champ :
+
+- **Correction grammaticale** : Détecte et corrige les erreurs grammaticales.
+- **Correction orthographique** : Corrige les fautes d’orthographe.  
+- **Complétion automatique** : Propose des suggestions contextuelles pour compléter ou reformuler le texte.
