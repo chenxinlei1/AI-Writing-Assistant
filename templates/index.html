@@ -15,9 +15,10 @@
                 <label for="text-input" class="form-label">Saisissez votre texte :</label>
                 <textarea name="text" id="text-input" class="form-control" rows="5"></textarea>
                 <div class="d-flex justify-content-center gap-2 mt-3">
-                    <button type="button" class="btn btn-primary" onclick="sendText()">Correction grammaticale</button>
-                    <button type="button" class="btn btn-success" onclick="sendText()">Correction orthographique</button>
-                    <button type="button" class="btn btn-warning" onclick="sendText()">Complétion automatique</button>
+                    <button type="button" class="btn btn-primary" onclick="sendText('grammar')">Correction grammaticale</button>
+                    <button type="button" class="btn btn-success" onclick="sendText('spelling')">Correction orthographique</button>
+                    <button type="button" class="btn btn-warning" onclick="sendText('completion')">Complétion automatique</button>
+
                 </div>
             </form>
         </div>
@@ -26,15 +27,29 @@
     </div>
 
     <script>
-        async function sendText() {
+        async function sendText(mode) {
             const formData = new FormData(document.getElementById("text-form"));
+            formData.append("mode", mode);  // 添加 mode 参数
+    
             const response = await fetch("/process_text", {
                 method: "POST",
                 body: formData
             });
+    
             const data = await response.json();
-            document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+    
+            // 清空旧结果
+            document.getElementById("result").innerText = "";
+    
+            if (mode === "grammar") {
+                document.getElementById("result").innerText = data.grammar_corrected || "(no result)";
+            } else if (mode === "spelling") {
+                document.getElementById("result").innerText = data.spelling_corrected || "(no result)";
+            } else if (mode === "completion") {
+                document.getElementById("result").innerText = data.auto_completed || "(no result)";
+            }
         }
     </script>
+    
 </body>
 </html>
