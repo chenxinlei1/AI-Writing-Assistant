@@ -15,41 +15,72 @@
                 <label for="text-input" class="form-label">Saisissez votre texte :</label>
                 <textarea name="text" id="text-input" class="form-control" rows="5"></textarea>
                 <div class="d-flex justify-content-center gap-2 mt-3">
-                    <button type="button" class="btn btn-primary" onclick="sendText('grammar')">Correction grammaticale</button>
-                    <button type="button" class="btn btn-success" onclick="sendText('spelling')">Correction orthographique</button>
-                    <button type="button" class="btn btn-warning" onclick="sendText('completion')">Complétion automatique</button>
-
+                    <button type="button" class="btn btn-primary btn-progress" data-label="Correction grammaticale" onclick="sendText(this, 'grammar')">
+                        <span class="btn-label">Correction grammaticale</span>
+                    </button>
+                    <button type="button" class="btn btn-success btn-progress" data-label="Correction orthographique" onclick="sendText(this, 'spelling')">
+                        <span class="btn-label">Correction orthographique</span>
+                    </button>
+                    <button type="button" class="btn btn-warning btn-progress" data-label="Complétion automatique" onclick="sendText(this, 'completion')">
+                        <span class="btn-label">Complétion automatique</span>
+                    </button>
                 </div>
+                
+                
             </form>
         </div>
-        <h3 class="text-center mt-4">Résultats :</h3>
-        <pre id="result" class="text-center"></pre>
+        <h3 class="text-center mt-4">😈 Résultats :</h3>
+        <div class="card shadow-lg p-4 mt-2">
+            <div id="result" class="form-control no-scroll" style="min-height: 150px; white-space: pre-wrap;"></div>
+        </div>
+
+
+        
     </div>
 
     <script>
-        async function sendText(mode) {
+        async function sendText(button, mode) {
+            const labelSpan = button.querySelector('.btn-label');
+            const originalLabel = button.getAttribute('data-label');
+        
+            button.classList.add('loading');
+            labelSpan.textContent = '🥸 Traitement...';
+            button.disabled = true;
+        
             const formData = new FormData(document.getElementById("text-form"));
-            formData.append("mode", mode);  // 添加 mode 参数
-    
-            const response = await fetch("/process_text", {
-                method: "POST",
-                body: formData
-            });
-    
-            const data = await response.json();
-    
-            // 清空旧结果
-            document.getElementById("result").innerText = "";
-    
-            if (mode === "grammar") {
-                document.getElementById("result").innerText = data.grammar_corrected || "(no result)";
-            } else if (mode === "spelling") {
-                document.getElementById("result").innerText = data.spelling_corrected || "(no result)";
-            } else if (mode === "completion") {
-                document.getElementById("result").innerText = data.auto_completed || "(no result)";
+            formData.append("mode", mode);
+        
+            try {
+                const response = await fetch("/process_text", {
+                    method: "POST",
+                    body: formData
+                });
+        
+                const data = await response.json();
+                const resultEl = document.getElementById("result");
+                resultEl.innerText = "";
+        
+                if (mode === "grammar") {
+                    resultEl.innerText = data.grammar_corrected || "(no result)";
+                } else if (mode === "spelling") {
+                    resultEl.innerText = data.spelling_corrected || "(no result)";
+                } else if (mode === "completion") {
+                    resultEl.innerText = data.auto_completed || "(no result)";
+                }
+        
+            } catch (e) {
+                alert("Une erreur est survenue.");
+            } finally {
+                setTimeout(() => {
+                    button.classList.remove('loading');
+                    labelSpan.textContent = originalLabel;
+                    button.disabled = false;
+                }, 2000); 
             }
         }
-    </script>
+        </script>
+        
+    
     
 </body>
 </html>

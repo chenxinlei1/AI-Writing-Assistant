@@ -1,0 +1,62 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 700px;
+}
+
+.card {
+    border-radius: 10px;
+    background-color: white;
+}
+
+textarea {
+    resize: none;
+}
+
+pre.form-control.no-scroll {
+    overflow-x: hidden;             
+    overflow-y: visible;            
+    white-space: pre-wrap;          
+    word-wrap: break-word;          
+    font-family: inherit;           
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    height: auto;
+    min-height: 150px;
+    box-shadow: none;
+}
+
+.btn-progress {
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.btn-progress .btn-label {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-progress::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    transition: none;
+}
+
+.btn-progress.loading::before {
+    animation: fillProgress 2s linear forwards;
+}
+
+@keyframes fillProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+}

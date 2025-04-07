@@ -1,13 +1,43 @@
+import httpx
 from fastapi import FastAPI, Form, Request
 from fastapi.templating import Jinja2Templates
 from typing import Dict
 import uvicorn
-import requests
 from symspellpy import SymSpell, Verbosity
 import os
+from fastapi.staticfiles import StaticFiles
+import requests
+
+
+API_KEY = "mu7S5LaQrgyizTY6C1gr1oVR9yVeVKrL"
+MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
+MODEL_NAME = "mistral-medium"
+
+HEADERS = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+async def call_mistral(prompt: str) -> str:
+    payload = {
+        "model": MODEL_NAME,
+        "messages": [
+            {"role": "system", "content": "You're a helpful text assistant."},
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": 0.7
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(MISTRAL_URL, json=payload, headers=HEADERS)
+        response.raise_for_status()
+        return response.json()["choices"][0]["message"]["content"]
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+
+# Mount the static directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
 sym_spell.load_dictionary("frequency_dictionary_en.txt", term_index=0, count_index=1)
@@ -39,8 +69,9 @@ def correct_spelling(text: str) -> str:
             corrected_words.append(word)
     return " ".join(corrected_words)
 
-def autocomplete_text(text: str) -> str:
-    return text + " (auto-completed)"  # 示例占位，可接 Hugging Face API
+async def autocomplete_text(text: str) -> str:
+    prompt = f"Continue this sentence:\n\n{text}"
+    return await call_mistral(prompt)
 
 @app.post("/process_text")
 async def process_text(
@@ -48,19 +79,19 @@ async def process_text(
     mode: str = Form(...)
 ) -> Dict[str, str]:
     result = {}
-
     if mode == "grammar":
         result["grammar_corrected"] = correct_grammar(text)
     elif mode == "spelling":
         result["spelling_corrected"] = correct_spelling(text)
     elif mode == "completion":
-        result["auto_completed"] = autocomplete_text(text)
-
+        result["auto_completed"] = await autocomplete_text(text)
+    else:
+        return {"error": "Invalid mode selected."}
     return result
 
 @app.get("/")
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    
+#if __name__ == "__main__":
+    #uvicorn.run(app, host="127.0.0.1", port=8000)
