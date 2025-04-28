@@ -1,0 +1,78 @@
+[
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "3a69f006-d68a-4069-9bd0-e1ecb762767c",
+    "text": "toduay"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "c7a0f217-a98f-4718-8e03-cfb5658b3609",
+    "text": "toduay"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "270a52b9-5a76-484b-b4be-a43b9aed0fd0",
+    "text": "toduay"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "8ed5d645-c84e-4987-b53f-fb442d0b7550",
+    "text": "today"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "683e010d-9e36-42ca-b9c5-c4df81fc3314",
+    "text": "he are the cat"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "311b8721-9057-47cf-9240-258363c12c7d",
+    "text": "he are the cat"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "59e89a44-269c-4b7f-aada-060e87dba15b",
+    "text": "he are the cat"
+  },
+  {
+    "id_user": "93b50852-4798-4357-8a8e-296c6ced71ac",
+    "id_text": "e0456f0a-03b0-44ad-b6e0-8dbfa5de4e4a",
+    "text": "he are the cat"
+  },
+  {
+    "id_text": "df007d96-6ec8-4253-b8dd-352faa03fc0f",
+    "original_text": "hullo\r\n",
+    "mode": "grammar",
+    "corrected_text": "Hello\r\n"
+  },
+  {
+    "id_text": "fc9b449c-f3e9-4192-9937-bce8a0954eda",
+    "original_text": "he are the cat\r\n\r\n",
+    "mode": "grammar",
+    "corrected_text": "He is the cat\r\n\r\n"
+  },
+  {
+    "id_text": "72d9e18c-eb68-4297-9737-d747692a6003",
+    "original_text": "he are the cat\r\n\r\n",
+    "mode": "spelling",
+    "corrected_text": "he are the cat"
+  },
+  {
+    "id_text": "a76bf84f-9e5c-4d1b-a143-72e3e07ad7b4",
+    "original_text": "he are the cat\r\n\r\n",
+    "mode": "completion",
+    "corrected_text": "It seems like there might be a mistake in your sentence. A correct version could be: \"He is the owner of the cat.\" or \"He likes the cat.\" If you meant something else, please provide more context so I can assist you better."
+  },
+  {
+    "id_text": "38c5e936-b4ce-4952-a79b-9bee0fdd2b69",
+    "original_text": "he are the cat\r\n\r\n",
+    "mode": "completion",
+    "corrected_text": "It seems there might be a mistake in the sentence you provided. If you meant to ask about the correct grammar, it should be \"he is the cat\" or \"he's the cat\". However, it is important to note that cats are usually referred to as \"it\" or \"she\"/\"he\", rather than using human pronouns like \"he\" or \"she\". So, a more appropriate sentence could be \"it is the cat\" or \"he is the cat\". Is there anything else I can help you with?"
+  },
+  {
+    "id_text": "d7d86b88-3b94-452d-9f48-8e89474fccb2",
+    "original_text": "why the people like the sun",
+    "mode": "completion",
+    "corrected_text": "Why do people like the sun? There are several reasons. Firstly, the sun is the primary source of light and heat for our planet, making it essential for life as we know it. Secondly, the sun provides us with vitamin D, which is important for our bones, immune system, and overall health. Thirdly, the sun can boost our mood and energy levels, making us feel happier and more positive. Lastly, the sun is also responsible for the beauty of our natural landscapes, from stunning sunrises and sunsets to the vibrant colors of plants and flowers. All of these factors contribute to our appreciation and enjoyment of the sun."
+  }
+]
