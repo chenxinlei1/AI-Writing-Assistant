@@ -8,79 +8,96 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="text-center">📝 AI Writing Assistant</h2>
-        <div class="card shadow-lg p-4 mt-4">
-            <form id="text-form">
-                <label for="text-input" class="form-label">Saisissez votre texte :</label>
-                <textarea name="text" id="text-input" class="form-control" rows="5"></textarea>
-                <div class="d-flex justify-content-center gap-2 mt-3">
-                    <button type="button" class="btn btn-primary btn-progress" data-label="Correction grammaticale" onclick="sendText(this, 'grammar')">
-                        <span class="btn-label">Correction grammaticale</span>
-                    </button>
-                    <button type="button" class="btn btn-success btn-progress" data-label="Correction orthographique" onclick="sendText(this, 'spelling')">
-                        <span class="btn-label">Correction orthographique</span>
-                    </button>
-                    <button type="button" class="btn btn-warning btn-progress" data-label="Complétion automatique" onclick="sendText(this, 'completion')">
-                        <span class="btn-label">Complétion automatique</span>
-                    </button>
-                </div>
-                
-                
-            </form>
-        </div>
-        <h3 class="text-center mt-4">😈 Résultats :</h3>
-        <div class="card shadow-lg p-4 mt-2">
-            <div id="result" class="form-control no-scroll" style="min-height: 150px; white-space: pre-wrap;"></div>
-        </div>
-
-
-        
+<div class="container mt-5">
+    <h2 class="text-center">📝 AI Writing Assistant</h2>
+    <div class="card shadow-lg p-4 mt-4">
+        <form id="text-form">
+            <label for="text-input" class="form-label">Saisissez votre texte :</label>
+            <textarea name="text" id="text-input" class="form-control" rows="5"></textarea>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <button type="button" class="btn btn-primary btn-progress" data-label="Correction grammaticale" onclick="sendText(this, 'grammar')">
+                    <span class="btn-label">Correction grammaticale</span>
+                </button>
+                <button type="button" class="btn btn-success btn-progress" data-label="Correction orthographique" onclick="sendText(this, 'spelling')">
+                    <span class="btn-label">Correction orthographique</span>
+                </button>
+                <button type="button" class="btn btn-warning btn-progress" data-label="Complétion automatique" onclick="sendText(this, 'completion')">
+                    <span class="btn-label">Complétion automatique</span>
+                </button>
+            </div>
+        </form>
     </div>
+    <h3 class="text-center mt-4">😈 Résultats :</h3>
+    <div class="card shadow-lg p-4 mt-2">
+        <div id="result" class="form-control no-scroll" style="min-height: 150px; white-space: pre-wrap;"></div>
+    </div>
+</div>
 
-    <script>
-        async function sendText(button, mode) {
-            const labelSpan = button.querySelector('.btn-label');
-            const originalLabel = button.getAttribute('data-label');
-        
-            button.classList.add('loading');
-            labelSpan.textContent = '🥸 Traitement...';
-            button.disabled = true;
-        
-            const formData = new FormData(document.getElementById("text-form"));
-            formData.append("mode", mode);
-        
-            try {
-                const response = await fetch("/process_text", {
-                    method: "POST",
-                    body: formData
-                });
-        
-                const data = await response.json();
-                const resultEl = document.getElementById("result");
-                resultEl.innerText = "";
-        
-                if (mode === "grammar") {
-                    resultEl.innerText = data.grammar_corrected || "(no result)";
-                } else if (mode === "spelling") {
-                    resultEl.innerText = data.spelling_corrected || "(no result)";
-                } else if (mode === "completion") {
-                    resultEl.innerText = data.auto_completed || "(no result)";
-                }
-        
-            } catch (e) {
-                alert("Une erreur est survenue.");
-            } finally {
-                setTimeout(() => {
-                    button.classList.remove('loading');
-                    labelSpan.textContent = originalLabel;
-                    button.disabled = false;
-                }, 2000); 
-            }
+<script>
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+async function sendText(button, mode) {
+    const labelSpan = button.querySelector('.btn-label');
+    const originalLabel = button.getAttribute('data-label');
+
+    button.classList.add('loading');
+    labelSpan.textContent = '🥸 Traitement...';
+    button.disabled = true;
+
+    const formData = new FormData(document.getElementById("text-form"));
+
+    // Manage id_user cookie
+    let id_user = getCookie('id_user');
+    if (!id_user) {
+        id_user = crypto.randomUUID();
+        setCookie('id_user', id_user, 365);
+    }
+    formData.append("id_user", id_user);
+    formData.append("mode", mode);
+
+    try {
+        const response = await fetch("/process_text", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        const resultEl = document.getElementById("result");
+        resultEl.innerText = "";
+
+        if (mode === "grammar") {
+            resultEl.innerText = data.grammar_corrected || "(no result)";
+        } else if (mode === "spelling") {
+            resultEl.innerText = data.spelling_corrected || "(no result)";
+        } else if (mode === "completion") {
+            resultEl.innerText = data.auto_completed || "(no result)";
         }
-        </script>
-        
-    
-    
+
+    } catch (e) {
+        alert("Une erreur est survenue.");
+    } finally {
+        setTimeout(() => {
+            button.classList.remove('loading');
+            labelSpan.textContent = originalLabel;
+            button.disabled = false;
+        }, 2000); 
+    }
+}
+</script>
+
 </body>
 </html>
