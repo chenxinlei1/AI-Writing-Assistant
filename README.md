@@ -34,13 +34,13 @@ Pour une installation manuelle :
 ---
 
 
-##Installation avec Docker
+## Installation avec Docker
 
 ```bash
 docker build -t ai-writing-assistant .
 ```
 
-##Installation manuelle
+## Installation manuelle
 
 **1. Cloner le dépôt :**
 
