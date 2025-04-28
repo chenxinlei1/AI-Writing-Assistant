@@ -106,7 +106,7 @@ async def process_text(
     mode: str = Form(...)
 ) -> Dict[str, str]:
     result = {}
-    id_text = str(uuid.uuid4())  # 每条保存记录一个独立id
+    id_text = str(uuid.uuid4())  
 
     if mode == "grammar":
         corrected = correct_grammar(text)

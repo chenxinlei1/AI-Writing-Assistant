@@ -60,3 +60,49 @@ pre.form-control.no-scroll {
     from { width: 0%; }
     to { width: 100%; }
 }
+
+/* --- Ajout : Style de la barre latérale de l'historique --- */
+.sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    height: 100%;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.sidebar.caché {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bouton-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.history-item {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-item:hover {
+    background-color: #f1f1f1;
+}
