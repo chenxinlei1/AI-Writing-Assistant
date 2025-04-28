@@ -45,7 +45,7 @@ docker build -t ai-writing-assistant .
 **1. Cloner le dépôt :**
 
 ```bash
-git clone https://github.com/chenxinlei1/AI-Writing-Assistant.git
+git clone git@github.com:chenxinlei1/AI-Writing-Assistant.git
 cd AI-Writing-Assistant
 ```
 
