@@ -69,12 +69,12 @@ Accéder ensuite à l'application via http://127.0.0.1:8000
 
 ## Fonctionnalités
 
-**Correction grammaticale :** Détection et correction automatique des erreurs de grammaire en anglais.
-**Correction orthographique :** Suggestions basées sur SymSpell pour les fautes de frappe.
-**Complétion automatique :** Génération de la suite d'un texte via API de modèle de langage.
-**Gestion de l'historique :**
+- **Correction grammaticale :** Détection et correction automatique des erreurs de grammaire en anglais.
+- **Correction orthographique :** Suggestions basées sur SymSpell pour les fautes de frappe.
+- **Complétion automatique :** Génération de la suite d'un texte via API de modèle de langage.
+- **Gestion de l'historique :** 
 L'utilisateur peut consulter toutes ses modifications précédentes via une barre latérale interactive.
 Possibilité de recharger un ancien texte pour le modifier.
-**Interface Responsive :**
+- **Interface Responsive :**
 Bootstrap 5 utilisé pour un rendu moderne et adaptatif.
 Sidebar flottante et repliable (toggle).
