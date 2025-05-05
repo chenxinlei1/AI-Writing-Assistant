@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir fastapi uvicorn httpx symspellpy jinja2
+RUN pip install --no-cache-dir fastapi uvicorn httpx symspellpy jinja2 requests python-multipart aiofiles itsdangerous markupsafe
 
 EXPOSE 8000
 
