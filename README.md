@@ -55,6 +55,7 @@ cd AI-Writing-Assistant
 pip install fastapi uvicorn httpx symspellpy requests
 ```
 
+
 ---
 
 ## Lancement de l'application
@@ -78,3 +79,12 @@ Possibilité de recharger un ancien texte pour le modifier.
 - **Interface Responsive :**
 Bootstrap 5 utilisé pour un rendu moderne et adaptatif.
 Sidebar flottante et repliable (toggle).
+
+
+## Captures d’écran
+
+<p align="center">
+  <img src="./images/main_input.jpg" alt="Interface principale" width="30%">
+  <img src="./images/result_output.jpg" alt="Résultats" width="30%">
+  <img src="./images/history_sidebar.jpg" alt="Historique" width="30%">
+</p>
