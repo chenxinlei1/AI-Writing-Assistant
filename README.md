@@ -88,3 +88,8 @@ Sidebar flottante et repliable (toggle).
   <img src="./images/result_output.jpg" alt="Résultats" width="30%">
   <img src="./images/history_sidebar.jpg" alt="Historique" width="30%">
 </p>
+
+**Exemple de structure JSON stockée localement dans le navigateur:**
+<p align="left">
+  <img src="./images/history_json_format.jpg" alt="Format JSON de l'historique" width="30%">
+</p>
